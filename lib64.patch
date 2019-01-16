@@ -1,0 +1,24 @@
+diff -urN ts_sal.old/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_pybind11.template ts_sal/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_pybind11.template
+--- ts_sal.old/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_pybind11.template	2018-11-01 05:43:54.016967514 +0000
++++ ts_sal/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_pybind11.template	2018-10-31 23:25:19.253746736 +0000
+@@ -13,7 +13,7 @@
+ OUTPUT_OPTION = -o "$@"
+ COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+ COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+-LDFLAGS       = -shared -fPIC -L"." -L"$(OSPL_HOME)/lib" -Wl,-rpath,\$$ORIGIN -Wl,-rpath,\$$ORIGIN/$(OSPL_HOME)/lib -L"$(SAL_WORK_DIR)/lib" -L"$(PYTHON_BUILD_LOCATION)/lib" -l"python$(PYTHONVER)"
++LDFLAGS       = -shared -fPIC -L"." -L"$(OSPL_HOME)/lib" -Wl,-rpath,\$$ORIGIN -Wl,-rpath,\$$ORIGIN/$(OSPL_HOME)/lib -L"$(SAL_WORK_DIR)/lib" -L"$(PYTHON_BUILD_LOCATION)/lib" -L"$(PYTHON_BUILD_LOCATION)/lib64" -l"python$(PYTHONVER)"
+ CCC           = $(CXX)
+ MAKEFILE      = Makefile.sacpp_SALData_pybind11
+ DEPENDENCIES  = 
+diff -urN ts_sal.old/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_python.template ts_sal/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_python.template
+--- ts_sal.old/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_python.template	2018-11-01 05:43:54.016967514 +0000
++++ ts_sal/lsstsal/scripts/code/templates/Makefile.sacpp_SAL_python.template	2018-10-31 23:21:11.396300155 +0000
+@@ -16,7 +16,7 @@
+ OUTPUT_OPTION = -o "$@"
+ COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+ COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+-LDFLAGS       = -shared -fPIC -L"." -L"$(OSPL_HOME)/lib" -Wl,-rpath,\$$ORIGIN -Wl,-rpath,\$$ORIGIN/$(OSPL_HOME)/lib -L"$(SAL_WORK_DIR)/lib" -L"$(PYTHON_BUILD_LOCATION)/lib" -lboost_python -l"python$(PYTHONVER)"
++LDFLAGS       = -shared -fPIC -L"." -L"$(OSPL_HOME)/lib" -Wl,-rpath,\$$ORIGIN -Wl,-rpath,\$$ORIGIN/$(OSPL_HOME)/lib -L"$(SAL_WORK_DIR)/lib" -L"$(PYTHON_BUILD_LOCATION)/lib" -L"$(PYTHON_BUILD_LOCATION)/lib64" -lboost_python -l"python$(PYTHONVER)"
+ CCC           = $(CXX)
+ MAKEFILE      = Makefile.sacpp_SALData_python
+ DEPENDENCIES  = 

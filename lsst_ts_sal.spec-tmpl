@@ -1,0 +1,114 @@
+Summary: LSST Communications Middleware Service Abstraction Layer
+Name: lsst_ts_sal
+Version: ${TS_SAL_VERSION}
+Release: ${TS_SAL_RELEASE}
+License: GPLv3
+BuildArch: noarch
+URL: https://github.com/lsst-ts/ts_sal
+Source0: lsst_ts_sal-v%{version}.tar.gz
+Patch0: lib64.patch
+Patch1: salenv.patch
+Requires: coreutils, tcl, tk, perl, make
+
+%description
+LSST Communications Middleware Service Abstraction Layer
+
+%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+
+%prep
+%setup -n lsst_ts_sal-%{version}
+%patch0 -p1
+%patch1 -p1
+
+%install
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/opt/lsst/ts/sal
+cp -r %{_builddir}/lsst_ts_sal-%{version}/lsstsal/* %{buildroot}/opt/lsst/ts/sal
+rm -rf %{buildroot}/opt/lsst/ts/sal/bin
+rm -rf %{buildroot}/opt/lsst/ts/sal/doc
+rm -rf %{buildroot}/opt/lsst/ts/sal/include/pybind11
+rm -rf %{buildroot}/opt/lsst/ts/sal/lib
+mv %{buildroot}/opt/lsst/ts/sal/scripts/code/labview %{buildroot}/opt/lsst/ts/sal/scripts/code-labview
+mv %{buildroot}/opt/lsst/ts/sal/scripts/code/templates %{buildroot}/opt/lsst/ts/sal/scripts/code-templates
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/code/*
+mv %{buildroot}/opt/lsst/ts/sal/scripts/code-labview %{buildroot}/opt/lsst/ts/sal/scripts/code/labview
+mv %{buildroot}/opt/lsst/ts/sal/scripts/code-templates %{buildroot}/opt/lsst/ts/sal/scripts/code/templates
+rm -f %{buildroot}/opt/lsst/ts/sal/scripts/code/templates/boost*
+rm -f %{buildroot}/opt/lsst/ts/sal/scripts/code/templates/example.so
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/datastreams
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/descriptions
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/doc
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/icd
+rm -f %{buildroot}/opt/lsst/ts/sal/scripts/idl.tgz
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/lib
+rm -f %{buildroot}/opt/lsst/ts/sal/scripts/md5sum.c
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/stateMachine
+rm -f %{buildroot}/opt/lsst/ts/sal/scripts/*.tcl.notsampled
+rm -f %{buildroot}/opt/lsst/ts/sal/scripts/*.tcl.prepython
+rm -rf %{buildroot}/opt/lsst/ts/sal/scripts/www
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(0644,root,root,0755)
+/opt/lsst/ts/sal/salenv.sh
+/opt/lsst/ts/sal/LICENSE
+/opt/lsst/ts/sal/include/*
+/opt/lsst/ts/sal/GPLv3License.txt
+/opt/lsst/ts/sal/LsstLicenseStatement.txt
+/opt/lsst/ts/sal/LICENSEc
+/opt/lsst/ts/sal/scripts/*.tcl
+/opt/lsst/ts/sal/scripts/code/templates/*
+/opt/lsst/ts/sal/scripts/code/labview/*
+/opt/lsst/ts/sal/scripts/initializeefdtables
+/opt/lsst/ts/sal/scripts/datastreams.names
+/opt/lsst/ts/sal/scripts/process_LFO_logevent
+/opt/lsst/ts/sal/scripts/rungenerator
+/opt/lsst/ts/sal/scripts/logevent_test_gui
+/opt/lsst/ts/sal/scripts/facsim.gif
+/opt/lsst/ts/sal/scripts/command_list_rotator
+/opt/lsst/ts/sal/scripts/commands-list.html
+/opt/lsst/ts/sal/scripts/buildsharedlib
+/opt/lsst/ts/sal/scripts/icd_template.html
+/opt/lsst/ts/sal/scripts/sal_streams.dat
+/opt/lsst/ts/sal/scripts/import_ts_xml
+/opt/lsst/ts/sal/scripts/rebuild-telemetry-docs
+/opt/lsst/ts/sal/scripts/whereami
+/opt/lsst/ts/sal/scripts/test
+/opt/lsst/ts/sal/scripts/event_list_dome
+/opt/lsst/ts/sal/scripts/command_hexapod_gui.tk
+/opt/lsst/ts/sal/scripts/event_list_camera
+/opt/lsst/ts/sal/scripts/rotator-evvent-list
+/opt/lsst/ts/sal/scripts/commands-list-camera
+/opt/lsst/ts/sal/scripts/commands-list
+/opt/lsst/ts/sal/scripts/command_test_gui
+/opt/lsst/ts/sal/scripts/runsalgenerator
+/opt/lsst/ts/sal/scripts/runtests.sh
+/opt/lsst/ts/sal/scripts/datastreams_desc.pubsub
+/opt/lsst/ts/sal/scripts/command_hexapod.html
+/opt/lsst/ts/sal/scripts/svcSAL_commandable.c
+/opt/lsst/ts/sal/scripts/command_test_gui.tk
+/opt/lsst/ts/sal/scripts/command_list_hexapod
+/opt/lsst/ts/sal/scripts/cmdevt-templates/*
+/opt/lsst/ts/sal/scripts/dbsim.gif
+/opt/lsst/ts/sal/scripts/makefile.sal
+/opt/lsst/ts/sal/scripts/register
+/opt/lsst/ts/sal/scripts/ddsmake
+/opt/lsst/ts/sal/scripts/datastreams.freqs
+/opt/lsst/ts/sal/scripts/event_list_rotator
+/opt/lsst/ts/sal/scripts/restartefd
+/opt/lsst/ts/sal/scripts/logevent_hexapod.html
+/opt/lsst/ts/sal/scripts/command_list_dome
+/opt/lsst/ts/sal/scripts/logevent_test_gui.tk
+/opt/lsst/ts/sal/scripts/logevents_hexapod.idl
+/opt/lsst/ts/sal/scripts/command_hexapod.idl
+/opt/lsst/ts/sal/scripts/command_list_camera
+/opt/lsst/ts/sal/scripts/svcSAL_commanding.c
+/opt/lsst/ts/sal/scripts/event_list_hexapod
+/opt/lsst/ts/sal/scripts/allfilters
+/opt/lsst/ts/sal/scripts/lvmake
+/opt/lsst/ts/sal/labview/SALTypedefs/*
+%defattr(0755,root,root,0755)
+/opt/lsst/ts/sal/scripts/buildall
+/opt/lsst/ts/sal/scripts/salgenerator

@@ -1,0 +1,15 @@
+diff -urN ts_sal-3.8.13.old/lsstsal/salenv.sh ts_sal-3.8.13/lsstsal/salenv.sh
+--- ts_sal-3.8.13.old/lsstsal/salenv.sh	2018-11-01 09:36:58.330095119 +0000
++++ ts_sal-3.8.13/lsstsal/salenv.sh	2018-11-01 14:22:36.940000000 +0000
+@@ -1,8 +1,7 @@
+ #!/bin/sh
+ 
+-SAL_DIR=${SAL_HOME}/scripts
+-PATH=${PATH}:${SAL_DIR}
+-export PATH
+-export SAL_DIR
++export SAL_HOME=/opt/lsst/ts/sal
++export SAL_DIR=${SAL_HOME}/scripts
++export PATH=${PATH}:${SAL_DIR}
+ echo "SAL development environment is configured"
+ 
